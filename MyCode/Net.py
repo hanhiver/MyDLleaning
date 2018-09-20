@@ -1,5 +1,6 @@
 from random import seed
 from random import random
+from time import time
 
 def initialize_network(n_input, n_hidden, n_output):
 	network = list()
@@ -24,10 +25,11 @@ def transfer_derivative(output):
 	output = 1/(1 + exp(-1 * input))
 	return output
 
+
 if __name__ == '__main__':
 	
-	seed(1)
+	seed(int(time()))
 
-	network = initialize_network(2, 2, 2)
+	network = initialize_network(2, 2, 1)
 	for layer in network:
 		print(layer)

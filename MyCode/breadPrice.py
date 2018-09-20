@@ -34,8 +34,8 @@ def predict(w0, w1, wheat):
     return price
 
 if __name__ == '__main__':
-    learning_rate = 0.2
-    num_iter = 100
+    learning_rate = 0.1
+    num_iter = 1000
     myweight = gradient_descent_runner(bread_price, 1, 1, learning_rate, num_iter)
     w0, w1 = myweight[-1]
     price = predict(w0, w1, 0.9)
