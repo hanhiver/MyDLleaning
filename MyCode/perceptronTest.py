@@ -1,5 +1,7 @@
 # 神经元模拟实现AND或者OR逻辑程序
 
+import matplotlib as plt 
+
 class Perceptron:
     def __init__(self, input_para_num, acti_func):
         # 初始化激活函数
@@ -7,6 +9,8 @@ class Perceptron:
 
         # 把所有参数W初始化都设置为0
         self.weights = [0.0 for _ in range(input_para_num)]
+
+        self.weights_hist = []
 
     def __str__(self):
         # 打印出所有的参数，按照W1, W2, b的顺序
@@ -30,6 +34,9 @@ class Perceptron:
                 self._update_weights(input_vec_label, prediction, rate)
 
     def _update_weights(self, input_vec_label, prediction, rate):
+        # 将当前的参数记录到参数历史中。
+        self.weights_hist.append(self.weights)
+
         # 根据预测的输出值调整参数。
         # 计算损失值
         delta = input_vec_label[-1] - prediction
@@ -68,10 +75,17 @@ def train_and_perceptron():
 
 if __name__ == '__main__':
     and_perception = train_and_perceptron()
+    print("[W1 -- W2 -- bais]")
     print(and_perception)
 
-    print ('input [1, 1] = %d' % and_perception.predict([-1, 1, 1]))
-    print ('input [0, 0] = %d' % and_perception.predict([-1, 0, 0]))
-    print ('input [1, 0] = %d' % and_perception.predict([-1, 1, 0]))
-    print ('input [0, 1] = %d' % and_perception.predict([-1, 0, 1]))
+    print("\n")
+
+    print ('input [0, 0] = output %d' % and_perception.predict([-1, 0, 0]))
+    print ('input [0, 1] = output %d' % and_perception.predict([-1, 0, 1]))
+    print ('input [1, 0] = output %d' % and_perception.predict([-1, 1, 0]))
+    print ('input [1, 1] = output %d' % and_perception.predict([-1, 1, 1]))
+
+
+
+
         
