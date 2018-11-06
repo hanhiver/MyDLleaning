@@ -1,6 +1,6 @@
 # 神经元模拟实现AND或者OR逻辑程序
 
-import matplotlib as plt 
+import matplotlib.pyplot as plt 
 
 class Perceptron:
     def __init__(self, input_para_num, acti_func):
@@ -8,9 +8,12 @@ class Perceptron:
         self.activator = acti_func
 
         # 把所有参数W初始化都设置为0
-        self.weights = [0.0 for _ in range(input_para_num)]
+        self.weights = [1.0 for _ in range(input_para_num)]
+        self.weights = [1.3, 2.2, 3.1]
 
-        self.weights_hist = []
+        self.W1_hist = []
+        self.W2_hist = []
+        self.b_hist = []
 
     def __str__(self):
         # 打印出所有的参数，按照W1, W2, b的顺序
@@ -35,7 +38,9 @@ class Perceptron:
 
     def _update_weights(self, input_vec_label, prediction, rate):
         # 将当前的参数记录到参数历史中。
-        self.weights_hist.append(self.weights)
+        self.W1_hist.append(self.weights[0])
+        self.W2_hist.append(self.weights[1])
+        self.b_hist.append(self.weights[2])
 
         # 根据预测的输出值调整参数。
         # 计算损失值
@@ -46,7 +51,7 @@ class Perceptron:
             self.weights[i] += rate * delta * input_vec_label[i]
 
 def func_activator(input_value):
-    # 激活函数
+    # 阶跃激活函数
     return 1.0 if input_value >= 0.0 else 0.0
 
 def get_training_dataset():
@@ -69,21 +74,37 @@ def train_and_perceptron():
     dataset = get_training_dataset()
 
     # 进行1000次训练，训练的学习率是0.01
-    p.train(dataset, 1000, 0.01)
+    p.train(dataset, 120, 0.01)
 
     return p
 
 if __name__ == '__main__':
-    and_perception = train_and_perceptron()
+    perception = train_and_perceptron()
+    
+    # 训练完成后模型参数输出
     print("[W1 -- W2 -- bais]")
-    print(and_perception)
+    print(perception)
 
-    print("\n")
+    # 模型预测结果输出
+    print ('input [0, 0] = output %d' % perception.predict([-1, 0, 0]))
+    print ('input [0, 1] = output %d' % perception.predict([-1, 0, 1]))
+    print ('input [1, 0] = output %d' % perception.predict([-1, 1, 0]))
+    print ('input [1, 1] = output %d' % perception.predict([-1, 1, 1]))
 
-    print ('input [0, 0] = output %d' % and_perception.predict([-1, 0, 0]))
-    print ('input [0, 1] = output %d' % and_perception.predict([-1, 0, 1]))
-    print ('input [1, 0] = output %d' % and_perception.predict([-1, 1, 0]))
-    print ('input [1, 1] = output %d' % and_perception.predict([-1, 1, 1]))
+    # 打印出W1, W2, b跟随训练次数收敛图像。
+    plt.figure()
+    x = range(len(perception.W1_hist))
+    #plt.xlim(0, 30)
+    plt.plot(
+        x, perception.W1_hist, 
+        x, perception.W2_hist,
+        x, perception.b_hist)
+    plt.legend(('W1', 'W2', 'bias'), 
+        bbox_to_anchor = (1.1, 1.05), 
+        loc = 'upper right', 
+        borderaxespad = 0.1)
+    plt.show()
+
 
 
 
