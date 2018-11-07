@@ -8,7 +8,7 @@ class Perceptron:
         self.activator = acti_func
 
         # 把所有参数W初始化都设置为0
-        self.weights = [1.0 for _ in range(input_para_num)]
+        # self.weights = [1.0 for _ in range(input_para_num)]
         self.weights = [1.3, 2.2, 3.1]
 
         self.W1_hist = []
