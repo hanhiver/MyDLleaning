@@ -12,8 +12,8 @@ class Perceptron:
         self.activator = acti_func
 
         # 把所有参数W初始化都设置为0
-        #self.weights = [1.0 for _ in range(input_para_num)]
-        self.weights = [1.1, 1.2, 1.1]
+        self.weights = [0.0 for _ in range(input_para_num)]
+        #self.weights = [1.1, 1.2, 1.1]
 
         # 记录参数W1, W2, b和模型训练损失历史。
         self.W1_hist = []
@@ -68,14 +68,14 @@ def get_training_dataset():
     # [偏置值，x1, x2, y]
 
     # dataset for AND
-    dataset = [[-1, 1, 1, 1], [-1, 0, 0, 0], [-1, 1, 0, 0], [-1, 0, 1, 0]]
+    #dataset = [[-1, 1, 1, 1], [-1, 0, 0, 0], [-1, 1, 0, 0], [-1, 0, 1, 0]]
 
     # dataset for OR
     #dataset = [[-1, 1, 1, 1], [-1, 0, 0, 0], [-1, 1, 0, 1], [-1, 0, 1, 1]]
 
     # dataset for XOR
     # 请注意，选择这个数据会导致模型无法收敛最终训练失败。
-    # dataset = [[-1, 1, 1, 0], [-1, 0, 0, 0], [-1, 1, 0, 1], [-1, 0, 1, 1]]
+    dataset = [[-1, 1, 1, 0], [-1, 0, 0, 0], [-1, 1, 0, 1], [-1, 0, 1, 1]]
 
     return dataset
 
