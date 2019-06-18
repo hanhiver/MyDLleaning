@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 TRAIN_ITERATION = 100
 TRAIN_RATE = 0.01
-PLOT_XLIM = 50
+PLOT_XLIM = 100
 
 class Perceptron:
     def __init__(self, input_para_num, acti_func):
@@ -12,8 +12,8 @@ class Perceptron:
         self.activator = acti_func
 
         # 把所有参数W初始化都设置为0
-        self.weights = [0.0 for _ in range(input_para_num)]
-        #self.weights = [1.1, 1.2, 1.1]
+        #self.weights = [0.0 for _ in range(input_para_num)]
+        self.weights = [1.1, 1.2, 1.1]
 
         # 记录参数W1, W2, b和模型训练损失历史。
         self.W1_hist = []
